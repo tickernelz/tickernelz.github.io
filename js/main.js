@@ -202,11 +202,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 message: message,
                 to_name: 'Zhafron Adani Kautsar',
                 to_email: 'zhafronadani@gmail.com',
-                reply_to: email
+                reply_to: email,
+                year: new Date().getFullYear() // Add current year for the template
             };
 
             // Send email using EmailJS
-            emailjs.send('service_wjre9ld', 'contact_form', templateParams)
+            emailjs.send('service_wjre9ld','template_svs7h34', templateParams)
                 .then(function(response) {
                     console.log('SUCCESS!', response.status, response.text);
                     showSuccessMessage(name, contactForm);
