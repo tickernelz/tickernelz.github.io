@@ -56,13 +56,25 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Header scroll effect
+    // Header scroll effect and scroll-down visibility
     const header = document.querySelector('.header');
+    const scrollDown = document.querySelector('.scroll-down');
+
     window.addEventListener('scroll', () => {
+        // Header effect
         if (window.scrollY > 50) {
             header.classList.add('scrolled');
         } else {
             header.classList.remove('scrolled');
+        }
+
+        // Hide scroll-down indicator when scrolling down
+        if (window.scrollY > 100) {
+            scrollDown.style.opacity = '0';
+            scrollDown.style.visibility = 'hidden';
+        } else {
+            scrollDown.style.opacity = '1';
+            scrollDown.style.visibility = 'visible';
         }
     });
 
@@ -162,23 +174,71 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Contact form submission
     const contactForm = document.getElementById('contact-form');
-    
+
     if (contactForm) {
         contactForm.addEventListener('submit', (e) => {
             e.preventDefault();
-            
-            // Get form data
+
+            // Get name for success message
             const name = document.getElementById('name').value;
+
+            // Show loading state
+            const submitBtn = contactForm.querySelector('button[type="submit"]');
+            const originalBtnText = submitBtn.innerHTML;
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+
+            // Get form data for email
             const email = document.getElementById('email').value;
             const subject = document.getElementById('subject').value;
             const message = document.getElementById('message').value;
-            
-            // Here you would typically send the form data to a server
-            // For now, we'll just show an alert
-            alert(`Thank you for your message, ${name}! I'll get back to you soon.`);
-            
-            // Reset form
-            contactForm.reset();
+
+            // Since you don't have templates, we'll use the direct send method
+            // Create parameters for a simple email
+            const templateParams = {
+                from_name: name,
+                from_email: email,
+                subject: subject,
+                message: message,
+                to_name: 'Zhafron Adani Kautsar',
+                to_email: 'zhafronadani@gmail.com',
+                reply_to: email
+            };
+
+            // Send email using EmailJS
+            emailjs.send('service_wjre9ld', 'contact_form', templateParams)
+                .then(function(response) {
+                    console.log('SUCCESS!', response.status, response.text);
+                    showSuccessMessage(name, contactForm);
+                })
+                .catch(function(error) {
+                    console.log('FAILED...', error);
+
+                    // Reset button state
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = originalBtnText;
+
+                    // Show error message
+                    alert('Oops! Something went wrong. Please try again later or contact me directly at zhafronadani@gmail.com');
+                });
+
+            // Function to show success message
+            function showSuccessMessage(name, form) {
+                const formContainer = form.parentElement;
+                formContainer.innerHTML = `
+                    <div class="success-message">
+                        <i class="fas fa-check-circle"></i>
+                        <h3>Message Sent Successfully!</h3>
+                        <p>Thank you for your message, ${name}! I'll get back to you soon.</p>
+                        <button class="btn btn-primary" id="send-another">Send Another Message</button>
+                    </div>
+                `;
+
+                // Add event listener to "Send Another Message" button
+                document.getElementById('send-another').addEventListener('click', () => {
+                    window.location.reload();
+                });
+            }
         });
     }
 });

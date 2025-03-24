@@ -30,7 +30,31 @@ Edit the following files to personalize your portfolio:
 - `css/style.css`: Customize colors, fonts, and other styling
 - `js/main.js`: Modify GitHub username and other functionality
 
-### 3. Deploy to GitHub Pages
+### 3. EmailJS Contact Form Setup
+
+The contact form is already configured with EmailJS using your Gmail service ID (`service_wjre9ld`). The form uses the following features:
+
+1. **Security Features**:
+   - Headless browser blocking to prevent spam
+   - Rate limiting (1 request per 10 seconds) to prevent abuse
+
+2. **Email Parameters**:
+   - `from_name` - Sender's name
+   - `from_email` - Sender's email
+   - `subject` - Email subject
+   - `message` - Email message
+   - `to_name` - Your name
+   - `to_email` - Your email address
+   - `reply_to` - Set to sender's email for easy replies
+
+3. **Template Setup (Optional)**:
+   If you want to create a custom email template in EmailJS:
+   - Go to your EmailJS dashboard
+   - Create a new template named `contact_form`
+   - Use the parameters listed above in your template design
+   - The code will automatically use your template if available
+
+### 4. Deploy to GitHub Pages
 
 1. Push your changes to your GitHub repository:
 
@@ -91,6 +115,7 @@ async function fetchGitHubRepos() {
 - JavaScript (ES6+)
 - [AOS](https://michalsnik.github.io/aos/) - Animate On Scroll Library
 - [Font Awesome](https://fontawesome.com/) - Icons
+- [EmailJS](https://www.emailjs.com/) - Contact Form Email Service
 - GitHub API
 
 ## License

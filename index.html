@@ -366,13 +366,14 @@ def hello_world():
                 </div>
                 <div class="contact-form-container" data-aos="fade-left" data-aos-duration="1000">
                     <form id="contact-form" class="contact-form">
+                        <input type="hidden" name="to_email" value="zhafronadani@gmail.com">
                         <div class="form-group">
                             <label for="name">Name</label>
-                            <input type="text" id="name" name="name" required>
+                            <input type="text" id="name" name="from_name" required>
                         </div>
                         <div class="form-group">
                             <label for="email">Email</label>
-                            <input type="email" id="email" name="email" required>
+                            <input type="email" id="email" name="from_email" required>
                         </div>
                         <div class="form-group">
                             <label for="subject">Subject</label>
@@ -452,6 +453,24 @@ def hello_world():
             </div>
         </div>
     </div>
+
+    <!-- EmailJS for contact form -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script>
+        (function() {
+            // Initialize EmailJS with your public key and additional security options
+            emailjs.init({
+                publicKey: "moiMVu1O4myK53F8-",
+                blockHeadless: true, // Do not allow headless browsers
+                limitRate: {
+                    // Set the limit rate for the application
+                    id: 'portfolio_contact',
+                    // Allow 1 request per 10s
+                    throttle: 10000,
+                }
+            });
+        })();
+    </script>
 
     <!-- Scripts -->
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
