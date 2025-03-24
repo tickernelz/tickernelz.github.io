@@ -4,52 +4,44 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Zhafron Adani Kautsar | Portfolio</title>
-    <meta name="description" content="Zhafron Adani Kautsar - Software Programmer specializing in Python and Odoo development">
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
-    
+    <meta name="description" content="Portfolio of Zhafron Adani Kautsar, a Software Programmer specializing in Python and Odoo framework">
+    <link rel="stylesheet" href="css/style.css">
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <!-- AOS Animation Library -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
-    
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 </head>
 <body>
     <!-- Preloader -->
     <div class="preloader">
-        <div class="loader"></div>
+        <svg class="preloader-svg" viewBox="0 0 100 100">
+            <circle class="preloader-circle" cx="50" cy="50" r="40"></circle>
+        </svg>
     </div>
 
+    <!-- Cursor -->
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+
     <!-- Header -->
-    <header id="header" class="header">
+    <header class="header">
         <div class="container">
-            <div class="header-content">
-                <div class="logo">
-                    <a href="index.html">ZK</a>
-                </div>
-                <nav class="navbar">
-                    <ul class="nav-menu">
-                        <li><a href="#home" class="nav-link active">Home</a></li>
-                        <li><a href="#about" class="nav-link">About</a></li>
-                        <li><a href="#skills" class="nav-link">Skills</a></li>
-                        <li><a href="#projects" class="nav-link">Projects</a></li>
-                        <li><a href="#contact" class="nav-link">Contact</a></li>
-                    </ul>
-                </nav>
-                <div class="hamburger">
-                    <span class="bar"></span>
-                    <span class="bar"></span>
-                    <span class="bar"></span>
-                </div>
+            <div class="logo">
+                <a href="#home">ZK</a>
+            </div>
+            <nav class="nav">
+                <ul class="nav-list">
+                    <li class="nav-item"><a href="#home" class="nav-link active">Home</a></li>
+                    <li class="nav-item"><a href="#about" class="nav-link">About</a></li>
+                    <li class="nav-item"><a href="#skills" class="nav-link">Skills</a></li>
+                    <li class="nav-item"><a href="#projects" class="nav-link">Projects</a></li>
+                    <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
             </div>
         </div>
     </header>
@@ -57,66 +49,89 @@
     <!-- Hero Section -->
     <section id="home" class="hero">
         <div class="container">
-            <div class="hero-content">
-                <div class="hero-text" data-aos="fade-up" data-aos-delay="200">
-                    <h1>Zhafron Adani Kautsar</h1>
-                    <h2 class="typed-text"></h2>
-                    <p>I build exceptional digital experiences with a focus on Python and Odoo development.</p>
-                    <div class="hero-btns">
-                        <a href="#projects" class="btn btn-primary">View My Work</a>
-                        <a href="#contact" class="btn btn-secondary">Contact Me</a>
-                    </div>
-                    <div class="social-icons">
-                        <a href="https://github.com/tickernelz" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
-                        <a href="https://www.linkedin.com/in/zhafronk" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin"></i></a>
-                        <a href="https://www.instagram.com/zhafronk" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
-                    </div>
+            <div class="hero-content" data-aos="fade-up" data-aos-duration="1000">
+                <h1 class="hero-title">Zhafron Adani Kautsar</h1>
+                <h2 class="hero-subtitle">Software Programmer</h2>
+                <p class="hero-description">Specializing in Python and Odoo Framework</p>
+                <div class="hero-cta">
+                    <a href="#projects" class="btn btn-primary">View Projects</a>
+                    <a href="#contact" class="btn btn-secondary">Contact Me</a>
                 </div>
-                <div class="hero-image" data-aos="fade-left" data-aos-delay="400">
-                    <div class="hero-shape"></div>
+            </div>
+            <div class="hero-image" data-aos="fade-left" data-aos-duration="1200">
+                <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" class="hero-blob">
+                    <path fill="#8A3FFC" d="M44.7,-76.4C58.8,-69.2,71.8,-59.1,79.6,-45.8C87.4,-32.6,90,-16.3,88.5,-1.5C87,13.3,81.3,26.6,73.6,39.9C65.9,53.2,56.1,66.5,42.8,74.3C29.4,82.2,12.7,84.6,-2.9,89.1C-18.6,93.5,-37.1,100,-51.4,95.2C-65.7,90.3,-75.8,74.2,-83.2,57.5C-90.6,40.8,-95.3,23.4,-93.2,7.2C-91.1,-9,-82.2,-18,-74.4,-28.2C-66.5,-38.4,-59.7,-49.8,-49.3,-58.9C-38.9,-68,-19.5,-74.8,-1.3,-72.8C16.8,-70.8,33.7,-60,44.7,-76.4Z" transform="translate(100 100)" />
+                </svg>
+                <div class="hero-code">
+                    <pre><code>
+def hello_world():
+    return "Hello, I'm Zhafron!"
+
+# Python enthusiast
+# Odoo specialist
+# Problem solver
+                    </code></pre>
                 </div>
             </div>
         </div>
         <div class="scroll-down">
-            <a href="#about"><i class="fas fa-chevron-down"></i></a>
+            <a href="#about">
+                <span class="mouse">
+                    <span class="wheel"></span>
+                </span>
+                <span class="arrow">
+                    <span></span>
+                    <span></span>
+                </span>
+            </a>
         </div>
     </section>
 
     <!-- About Section -->
     <section id="about" class="about section">
         <div class="container">
-            <div class="section-title" data-aos="fade-up">
-                <h2>About Me</h2>
-                <span class="line"></span>
+            <div class="section-header" data-aos="fade-up">
+                <h2 class="section-title">About Me</h2>
+                <div class="section-line"></div>
             </div>
             <div class="about-content">
-                <div class="about-image" data-aos="fade-right" data-aos-delay="200">
-                    <img src="assets/img/profile.svg" alt="Zhafron Adani Kautsar">
-                    <div class="about-shape"></div>
+                <div class="about-image" data-aos="fade-right" data-aos-duration="1000">
+                    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" class="about-blob">
+                        <path fill="#FF6B6B" d="M39.9,-65.7C54.1,-60.5,69.3,-53.8,77.3,-42.1C85.2,-30.3,85.9,-13.4,83.1,2.8C80.3,19,74,34.4,64.4,47.8C54.8,61.1,41.9,72.3,27.1,77.7C12.3,83.1,-4.4,82.7,-19.6,77.8C-34.8,72.9,-48.5,63.5,-59.9,51.2C-71.3,38.9,-80.3,23.7,-83.9,6.4C-87.5,-10.9,-85.7,-30.3,-76.6,-45.2C-67.5,-60.1,-51.1,-70.5,-35.6,-75.1C-20.1,-79.7,-5.5,-78.5,7.4,-74.1C20.3,-69.7,25.7,-70.9,39.9,-65.7Z" transform="translate(100 100)" />
+                    </svg>
+                    <div class="about-emoji">👨‍💻</div>
                 </div>
-                <div class="about-text" data-aos="fade-left" data-aos-delay="300">
-                    <h3>Software Programmer</h3>
-                    <p>I'm a passionate software programmer with expertise in Python and Odoo development. Currently working full-time at HashMicro, I specialize in building and customizing Odoo ERP solutions to meet business needs.</p>
-                    <p>With a strong foundation in Python programming and a keen eye for detail, I enjoy solving complex problems and creating efficient, scalable solutions. My experience spans from backend development to full-stack applications.</p>
-                    <div class="about-info">
-                        <div class="info-item">
-                            <span class="info-title">Name:</span>
-                            <span class="info-value">Zhafron Adani Kautsar</span>
+                <div class="about-text" data-aos="fade-left" data-aos-duration="1000">
+                    <p>I'm a Software Programmer with a focus on Python and the Odoo framework. Currently working full-time on Odoo-based solutions, I enjoy building efficient and scalable applications that solve real-world problems.</p>
+                    <p>With a strong background in Python development, I specialize in creating custom modules and extending functionality in Odoo ERP systems. I'm passionate about clean code, automation, and continuous learning.</p>
+                    <div class="about-details">
+                        <div class="about-detail">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Bandung, Indonesia</span>
                         </div>
-                        <div class="info-item">
-                            <span class="info-title">Location:</span>
-                            <span class="info-value">Bandung, Indonesia</span>
+                        <div class="about-detail">
+                            <i class="fas fa-briefcase"></i>
+                            <span>Full-time at HashMicro</span>
                         </div>
-                        <div class="info-item">
-                            <span class="info-title">Email:</span>
-                            <span class="info-value">contact@tickernelz.github.io</span>
-                        </div>
-                        <div class="info-item">
-                            <span class="info-title">Specialization:</span>
-                            <span class="info-value">Python, Odoo Development</span>
+                        <div class="about-detail">
+                            <i class="fas fa-code"></i>
+                            <span>Python & Odoo Specialist</span>
                         </div>
                     </div>
-                    <a href="#" class="btn btn-primary download-cv">Download CV</a>
+                    <div class="about-cta">
+                        <a href="#" class="btn btn-primary" id="download-cv">Download CV</a>
+                        <div class="social-links">
+                            <a href="https://github.com/tickernelz" target="_blank" class="social-link">
+                                <i class="fab fa-github"></i>
+                            </a>
+                            <a href="https://www.linkedin.com/in/zhafronk" target="_blank" class="social-link">
+                                <i class="fab fa-linkedin"></i>
+                            </a>
+                            <a href="https://www.instagram.com/zhafronk" target="_blank" class="social-link">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -125,57 +140,143 @@
     <!-- Skills Section -->
     <section id="skills" class="skills section">
         <div class="container">
-            <div class="section-title" data-aos="fade-up">
-                <h2>My Skills</h2>
-                <span class="line"></span>
+            <div class="section-header" data-aos="fade-up">
+                <h2 class="section-title">My Skills</h2>
+                <div class="section-line"></div>
             </div>
             <div class="skills-content">
-                <div class="skills-text" data-aos="fade-right" data-aos-delay="200">
-                    <h3>Technical Expertise</h3>
-                    <p>I've developed a diverse set of skills throughout my career, with a strong focus on Python and Odoo development. My technical expertise includes:</p>
-                </div>
-                <div class="skills-cards" data-aos="fade-up" data-aos-delay="300">
-                    <div class="skill-card">
-                        <div class="skill-icon">
-                            <i class="fab fa-python"></i>
+                <div class="skills-categories">
+                    <div class="skills-category" data-aos="fade-up" data-aos-delay="100">
+                        <div class="skills-category-header">
+                            <i class="fas fa-code"></i>
+                            <h3>Programming</h3>
                         </div>
-                        <h4>Python</h4>
-                        <p>Expert in Python programming with extensive experience in building applications and automation tools.</p>
-                    </div>
-                    <div class="skill-card">
-                        <div class="skill-icon">
-                            <i class="fas fa-cogs"></i>
+                        <div class="skills-list">
+                            <div class="skill-item">
+                                <div class="skill-info">
+                                    <span class="skill-name">Python</span>
+                                    <span class="skill-percentage">90%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 90%"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-info">
+                                    <span class="skill-name">JavaScript</span>
+                                    <span class="skill-percentage">75%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 75%"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-info">
+                                    <span class="skill-name">PHP</span>
+                                    <span class="skill-percentage">80%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 80%"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-info">
+                                    <span class="skill-name">Java</span>
+                                    <span class="skill-percentage">65%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 65%"></div>
+                                </div>
+                            </div>
                         </div>
-                        <h4>Odoo</h4>
-                        <p>Specialized in Odoo ERP development, customization, and implementation for business solutions.</p>
                     </div>
-                    <div class="skill-card">
-                        <div class="skill-icon">
+                    <div class="skills-category" data-aos="fade-up" data-aos-delay="200">
+                        <div class="skills-category-header">
                             <i class="fas fa-database"></i>
+                            <h3>Frameworks & Tools</h3>
                         </div>
-                        <h4>PostgreSQL</h4>
-                        <p>Proficient in database design, optimization, and management with PostgreSQL.</p>
+                        <div class="skills-list">
+                            <div class="skill-item">
+                                <div class="skill-info">
+                                    <span class="skill-name">Odoo</span>
+                                    <span class="skill-percentage">95%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 95%"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-info">
+                                    <span class="skill-name">Laravel</span>
+                                    <span class="skill-percentage">80%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 80%"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-info">
+                                    <span class="skill-name">Docker</span>
+                                    <span class="skill-percentage">85%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 85%"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-info">
+                                    <span class="skill-name">PostgreSQL</span>
+                                    <span class="skill-percentage">85%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 85%"></div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="skill-card">
-                        <div class="skill-icon">
-                            <i class="fab fa-docker"></i>
+                    <div class="skills-category" data-aos="fade-up" data-aos-delay="300">
+                        <div class="skills-category-header">
+                            <i class="fas fa-laptop-code"></i>
+                            <h3>Web Development</h3>
                         </div>
-                        <h4>Docker</h4>
-                        <p>Experienced in containerization and deployment using Docker for development and production.</p>
-                    </div>
-                    <div class="skill-card">
-                        <div class="skill-icon">
-                            <i class="fab fa-js"></i>
+                        <div class="skills-list">
+                            <div class="skill-item">
+                                <div class="skill-info">
+                                    <span class="skill-name">HTML/CSS</span>
+                                    <span class="skill-percentage">85%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 85%"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-info">
+                                    <span class="skill-name">Bootstrap</span>
+                                    <span class="skill-percentage">80%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 80%"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-info">
+                                    <span class="skill-name">jQuery</span>
+                                    <span class="skill-percentage">75%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 75%"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-info">
+                                    <span class="skill-name">Responsive Design</span>
+                                    <span class="skill-percentage">90%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 90%"></div>
+                                </div>
+                            </div>
                         </div>
-                        <h4>JavaScript</h4>
-                        <p>Knowledge of JavaScript for frontend development and enhancing user interfaces.</p>
-                    </div>
-                    <div class="skill-card">
-                        <div class="skill-icon">
-                            <i class="fab fa-git-alt"></i>
-                        </div>
-                        <h4>Git</h4>
-                        <p>Proficient in version control and collaborative development using Git.</p>
                     </div>
                 </div>
             </div>
@@ -185,25 +286,30 @@
     <!-- Projects Section -->
     <section id="projects" class="projects section">
         <div class="container">
-            <div class="section-title" data-aos="fade-up">
-                <h2>My Projects</h2>
-                <span class="line"></span>
+            <div class="section-header" data-aos="fade-up">
+                <h2 class="section-title">My Projects</h2>
+                <div class="section-line"></div>
             </div>
-            <div class="projects-filter" data-aos="fade-up" data-aos-delay="200">
+            <div class="projects-filter" data-aos="fade-up">
                 <button class="filter-btn active" data-filter="all">All</button>
                 <button class="filter-btn" data-filter="python">Python</button>
                 <button class="filter-btn" data-filter="odoo">Odoo</button>
                 <button class="filter-btn" data-filter="web">Web</button>
                 <button class="filter-btn" data-filter="other">Other</button>
             </div>
-            <div class="projects-container" data-aos="fade-up" data-aos-delay="300">
-                <!-- Projects will be dynamically loaded here from GitHub API -->
+            <div class="projects-grid" id="projects-container">
+                <!-- Projects will be dynamically loaded here -->
                 <div class="loading-spinner">
-                    <div class="spinner"></div>
+                    <svg viewBox="0 0 50 50" class="spinner">
+                        <circle class="spinner-circle" cx="25" cy="25" r="20"></circle>
+                    </svg>
+                    <p>Loading projects...</p>
                 </div>
             </div>
-            <div class="projects-more" data-aos="fade-up" data-aos-delay="400">
-                <a href="https://github.com/tickernelz?tab=repositories" target="_blank" class="btn btn-primary">View More on GitHub</a>
+            <div class="projects-more" data-aos="fade-up">
+                <a href="https://github.com/tickernelz" target="_blank" class="btn btn-primary">
+                    <i class="fab fa-github"></i> View More on GitHub
+                </a>
             </div>
         </div>
     </section>
@@ -211,68 +317,74 @@
     <!-- Contact Section -->
     <section id="contact" class="contact section">
         <div class="container">
-            <div class="section-title" data-aos="fade-up">
-                <h2>Get In Touch</h2>
-                <span class="line"></span>
+            <div class="section-header" data-aos="fade-up">
+                <h2 class="section-title">Get In Touch</h2>
+                <div class="section-line"></div>
             </div>
             <div class="contact-content">
-                <div class="contact-info" data-aos="fade-right" data-aos-delay="200">
-                    <h3>Let's Connect</h3>
-                    <p>Feel free to reach out to me for collaborations, job opportunities, or just to say hello!</p>
-                    <div class="contact-item">
-                        <div class="contact-icon">
+                <div class="contact-info" data-aos="fade-right" data-aos-duration="1000">
+                    <div class="contact-card">
+                        <div class="contact-card-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-card-content">
+                            <h3>Email</h3>
+                            <p>contact@zhafronk.dev</p>
+                        </div>
+                    </div>
+                    <div class="contact-card">
+                        <div class="contact-card-icon">
                             <i class="fas fa-map-marker-alt"></i>
                         </div>
-                        <div class="contact-text">
-                            <h4>Location</h4>
+                        <div class="contact-card-content">
+                            <h3>Location</h3>
                             <p>Bandung, Indonesia</p>
                         </div>
                     </div>
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fas fa-envelope"></i>
+                    <div class="contact-card">
+                        <div class="contact-card-icon">
+                            <i class="fas fa-briefcase"></i>
                         </div>
-                        <div class="contact-text">
-                            <h4>Email</h4>
-                            <p>contact@tickernelz.github.io</p>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fab fa-linkedin"></i>
-                        </div>
-                        <div class="contact-text">
-                            <h4>LinkedIn</h4>
-                            <p><a href="https://www.linkedin.com/in/zhafronk" target="_blank">linkedin.com/in/zhafronk</a></p>
+                        <div class="contact-card-content">
+                            <h3>Work</h3>
+                            <p>HashMicro - Odoo Developer</p>
                         </div>
                     </div>
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fab fa-github"></i>
-                        </div>
-                        <div class="contact-text">
-                            <h4>GitHub</h4>
-                            <p><a href="https://github.com/tickernelz" target="_blank">github.com/tickernelz</a></p>
+                    <div class="contact-social">
+                        <h3>Social Profiles</h3>
+                        <div class="social-links">
+                            <a href="https://github.com/tickernelz" target="_blank" class="social-link">
+                                <i class="fab fa-github"></i>
+                            </a>
+                            <a href="https://www.linkedin.com/in/zhafronk" target="_blank" class="social-link">
+                                <i class="fab fa-linkedin"></i>
+                            </a>
+                            <a href="https://www.instagram.com/zhafronk" target="_blank" class="social-link">
+                                <i class="fab fa-instagram"></i>
+                            </a>
                         </div>
                     </div>
                 </div>
-                <div class="contact-form" data-aos="fade-left" data-aos-delay="300">
-                    <form id="contactForm">
+                <div class="contact-form-container" data-aos="fade-left" data-aos-duration="1000">
+                    <form id="contact-form" class="contact-form">
                         <div class="form-group">
-                            <input type="text" id="name" name="name" placeholder="Your Name" required>
+                            <label for="name">Name</label>
+                            <input type="text" id="name" name="name" required>
                         </div>
                         <div class="form-group">
-                            <input type="email" id="email" name="email" placeholder="Your Email" required>
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
                         </div>
                         <div class="form-group">
-                            <input type="text" id="subject" name="subject" placeholder="Subject" required>
+                            <label for="subject">Subject</label>
+                            <input type="text" id="subject" name="subject" required>
                         </div>
                         <div class="form-group">
-                            <textarea id="message" name="message" placeholder="Your Message" required></textarea>
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" rows="5" required></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary">Send Message</button>
                     </form>
-                    <div id="formStatus"></div>
                 </div>
             </div>
         </div>
@@ -283,32 +395,67 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-logo">
-                    <h3>Zhafron Kautsar</h3>
+                    <a href="#home">ZK</a>
                     <p>Software Programmer</p>
                 </div>
+                <div class="footer-nav">
+                    <ul class="footer-nav-list">
+                        <li class="footer-nav-item"><a href="#home" class="footer-nav-link">Home</a></li>
+                        <li class="footer-nav-item"><a href="#about" class="footer-nav-link">About</a></li>
+                        <li class="footer-nav-item"><a href="#skills" class="footer-nav-link">Skills</a></li>
+                        <li class="footer-nav-item"><a href="#projects" class="footer-nav-link">Projects</a></li>
+                        <li class="footer-nav-item"><a href="#contact" class="footer-nav-link">Contact</a></li>
+                    </ul>
+                </div>
                 <div class="footer-social">
-                    <a href="https://github.com/tickernelz" target="_blank"><i class="fab fa-github"></i></a>
-                    <a href="https://www.linkedin.com/in/zhafronk" target="_blank"><i class="fab fa-linkedin"></i></a>
-                    <a href="https://www.instagram.com/zhafronk" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://github.com/tickernelz" target="_blank" class="footer-social-link">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/zhafronk" target="_blank" class="footer-social-link">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a href="https://www.instagram.com/zhafronk" target="_blank" class="footer-social-link">
+                        <i class="fab fa-instagram"></i>
+                    </a>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; <span id="currentYear"></span> Zhafron Adani Kautsar. All Rights Reserved.</p>
+                <p>&copy; 2024 Zhafron Adani Kautsar. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
     <!-- Back to Top Button -->
-    <a href="#" class="back-to-top"><i class="fas fa-arrow-up"></i></a>
+    <a href="#home" class="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </a>
 
-    <!-- JavaScript Libraries -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/isotope-layout/3.0.6/isotope.pkgd.min.js"></script>
-    
-    <!-- Custom JavaScript -->
-    <script src="assets/js/main.js"></script>
-    <script src="assets/js/github-projects.js"></script>
+    <!-- Project Modal -->
+    <div class="modal" id="project-modal">
+        <div class="modal-content">
+            <span class="modal-close">&times;</span>
+            <div class="modal-body">
+                <h2 id="modal-title"></h2>
+                <div class="modal-details">
+                    <div class="modal-description" id="modal-description"></div>
+                    <div class="modal-meta">
+                        <div class="modal-languages" id="modal-languages"></div>
+                        <div class="modal-links">
+                            <a href="#" target="_blank" id="modal-repo-link" class="btn btn-secondary">
+                                <i class="fab fa-github"></i> View Repository
+                            </a>
+                            <a href="#" target="_blank" id="modal-demo-link" class="btn btn-primary">
+                                <i class="fas fa-external-link-alt"></i> Live Demo
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script src="js/main.js"></script>
 </body>
 </html>

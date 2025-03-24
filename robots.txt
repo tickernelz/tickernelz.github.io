@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://tickernelz.github.io/sitemap.xml
