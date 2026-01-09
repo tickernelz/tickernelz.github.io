@@ -8,8 +8,11 @@
     <link rel="stylesheet" href="css/style.css">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <!-- AOS Animation Library -->
-    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <!-- GSAP Animation Library -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+    <!-- Lenis Smooth Scroll -->
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.42/bundled/lenis.min.js"></script>
 </head>
 <body>
     <!-- Preloader -->
@@ -22,6 +25,9 @@
     <!-- Cursor -->
     <div class="cursor"></div>
     <div class="cursor-follower"></div>
+
+    <!-- Scroll Progress Bar -->
+    <div class="scroll-progress"></div>
 
     <!-- Header -->
     <header class="header">
@@ -49,28 +55,13 @@
     <!-- Hero Section -->
     <section id="home" class="hero">
         <div class="container">
-            <div class="hero-content" data-aos="fade-up" data-aos-duration="1000">
-                <h1 class="hero-title">Zhafron Adani Kautsar</h1>
+            <div class="hero-content">
                 <h2 class="hero-subtitle">Software Programmer</h2>
-                <p class="hero-description">Specializing in Python and Odoo Framework</p>
+                <h1 class="hero-title">Zhafron Adani Kautsar</h1>
+                <p class="hero-description">Specializing in <span>Python</span> × <span>Odoo</span> × <span>Full-Stack Development</span></p>
                 <div class="hero-cta">
                     <a href="#projects" class="btn btn-primary">View Projects</a>
-                    <a href="#contact" class="btn btn-secondary">Contact Me</a>
-                </div>
-            </div>
-            <div class="hero-image" data-aos="fade-left" data-aos-duration="1200">
-                <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" class="hero-blob">
-                    <path fill="#8A3FFC" d="M44.7,-76.4C58.8,-69.2,71.8,-59.1,79.6,-45.8C87.4,-32.6,90,-16.3,88.5,-1.5C87,13.3,81.3,26.6,73.6,39.9C65.9,53.2,56.1,66.5,42.8,74.3C29.4,82.2,12.7,84.6,-2.9,89.1C-18.6,93.5,-37.1,100,-51.4,95.2C-65.7,90.3,-75.8,74.2,-83.2,57.5C-90.6,40.8,-95.3,23.4,-93.2,7.2C-91.1,-9,-82.2,-18,-74.4,-28.2C-66.5,-38.4,-59.7,-49.8,-49.3,-58.9C-38.9,-68,-19.5,-74.8,-1.3,-72.8C16.8,-70.8,33.7,-60,44.7,-76.4Z" transform="translate(100 100)" />
-                </svg>
-                <div class="hero-code">
-                    <pre><code>
-def hello_world():
-    return "Hello, I'm Zhafron!"
-
-# Python enthusiast
-# Odoo specialist
-# Problem solver
-                    </code></pre>
+                    <a href="#contact" class="btn btn-secondary">Get in Touch</a>
                 </div>
             </div>
         </div>
@@ -78,10 +69,6 @@ def hello_world():
             <a href="#about">
                 <span class="mouse">
                     <span class="wheel"></span>
-                </span>
-                <span class="arrow">
-                    <span></span>
-                    <span></span>
                 </span>
             </a>
         </div>
@@ -139,13 +126,13 @@ def hello_world():
     <!-- Skills Section -->
     <section id="skills" class="skills section">
         <div class="container">
-            <div class="section-header" data-aos="fade-up">
-                <h2 class="section-title">My Skills</h2>
+            <div class="section-header">
+                <h2 class="section-title">Skills & Tools</h2>
                 <div class="section-line"></div>
             </div>
             <div class="skills-content">
                 <div class="skills-categories">
-                    <div class="skills-category" data-aos="fade-up" data-aos-delay="100">
+                    <div class="skills-category">
                         <div class="skills-category-header">
                             <i class="fas fa-code"></i>
                             <h3>Programming</h3>
@@ -189,7 +176,7 @@ def hello_world():
                             </div>
                         </div>
                     </div>
-                    <div class="skills-category" data-aos="fade-up" data-aos-delay="200">
+                    <div class="skills-category">
                         <div class="skills-category-header">
                             <i class="fas fa-database"></i>
                             <h3>Frameworks & Tools</h3>
@@ -233,7 +220,7 @@ def hello_world():
                             </div>
                         </div>
                     </div>
-                    <div class="skills-category" data-aos="fade-up" data-aos-delay="300">
+                    <div class="skills-category">
                         <div class="skills-category-header">
                             <i class="fas fa-laptop-code"></i>
                             <h3>Web Development</h3>
@@ -285,16 +272,17 @@ def hello_world():
     <!-- Projects Section -->
     <section id="projects" class="projects section">
         <div class="container">
-            <div class="section-header" data-aos="fade-up">
-                <h2 class="section-title">My Projects</h2>
+            <div class="section-header">
+                <h2 class="section-title">Projects</h2>
                 <div class="section-line"></div>
             </div>
-            <div class="projects-filter" data-aos="fade-up">
-                <button class="filter-btn active" data-filter="all">All</button>
+            <div class="projects-filter">
+                <button class="filter-btn active" data-filter="all">All Projects</button>
+                <button class="filter-btn" data-filter="starred">Starred</button>
+                <button class="filter-btn" data-filter="latest">Latest Updates</button>
                 <button class="filter-btn" data-filter="python">Python</button>
                 <button class="filter-btn" data-filter="odoo">Odoo</button>
                 <button class="filter-btn" data-filter="web">Web</button>
-                <button class="filter-btn" data-filter="other">Other</button>
             </div>
             <div class="projects-grid" id="projects-container">
                 <!-- Projects will be dynamically loaded here -->
@@ -305,9 +293,9 @@ def hello_world():
                     <p>Loading projects...</p>
                 </div>
             </div>
-            <div class="projects-more" data-aos="fade-up">
-                <a href="https://github.com/tickernelz" target="_blank" class="btn btn-primary">
-                    <i class="fab fa-github"></i> View More on GitHub
+            <div class="projects-more">
+                <a href="https://github.com/tickernelz?tab=repositories" target="_blank" class="btn btn-primary">
+                    <i class="fab fa-github"></i> View All on GitHub
                 </a>
             </div>
         </div>
@@ -316,12 +304,12 @@ def hello_world():
     <!-- Contact Section -->
     <section id="contact" class="contact section">
         <div class="container">
-            <div class="section-header" data-aos="fade-up">
+            <div class="section-header">
                 <h2 class="section-title">Get In Touch</h2>
                 <div class="section-line"></div>
             </div>
             <div class="contact-content">
-                <div class="contact-info" data-aos="fade-right" data-aos-duration="1000">
+                <div class="contact-info">
                     <div class="contact-card">
                         <div class="contact-card-icon">
                             <i class="fas fa-envelope"></i>
@@ -364,7 +352,7 @@ def hello_world():
                         </div>
                     </div>
                 </div>
-                <div class="contact-form-container" data-aos="fade-left" data-aos-duration="1000">
+                <div class="contact-form-container">
                     <form id="contact-form" class="contact-form">
                         <input type="hidden" name="to_email" value="zhafronadani@gmail.com">
                         <div class="form-group">
@@ -472,8 +460,7 @@ def hello_world():
         })();
     </script>
 
-    <!-- Scripts -->
-    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <!-- Main Script -->
     <script src="js/main.js"></script>
 </body>
 </html>

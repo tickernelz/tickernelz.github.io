@@ -1,75 +1,83 @@
-/**
- * Portfolio Website - Zhafron Adani Kautsar
- * Main JavaScript File
- */
-
 document.addEventListener('DOMContentLoaded', () => {
-    // Initialize AOS animations
-    AOS.init({
-        duration: 800,
-        easing: 'ease',
-        once: true,
-        mirror: false
+    gsap.registerPlugin(ScrollTrigger);
+    const lenis = new Lenis({
+        duration: 1.2,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        smooth: true,
+        smoothTouch: false
     });
-
-    // Preloader
+    function raf(time) {
+        lenis.raf(time);
+        requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
+    lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add((time) => {
+        lenis.raf(time * 1000);
+    });
+    gsap.ticker.lagSmoothing(0);
     const preloader = document.querySelector('.preloader');
     window.addEventListener('load', () => {
         setTimeout(() => {
             preloader.classList.add('hide');
         }, 500);
     });
-
-    // Custom cursor
     const cursor = document.querySelector('.cursor');
     const cursorFollower = document.querySelector('.cursor-follower');
-
+    let mouseX = 0, mouseY = 0;
+    let followerX = 0, followerY = 0;
     document.addEventListener('mousemove', (e) => {
-        cursor.style.left = e.clientX + 'px';
-        cursor.style.top = e.clientY + 'px';
-        
-        cursorFollower.style.left = e.clientX + 'px';
-        cursorFollower.style.top = e.clientY + 'px';
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        cursor.style.left = mouseX + 'px';
+        cursor.style.top = mouseY + 'px';
     });
-
+    function animateFollower() {
+        const dx = mouseX - followerX;
+        const dy = mouseY - followerY;
+        followerX += dx * 0.1;
+        followerY += dy * 0.1;
+        cursorFollower.style.left = followerX + 'px';
+        cursorFollower.style.top = followerY + 'px';
+        requestAnimationFrame(animateFollower);
+    }
+    animateFollower();
     document.addEventListener('mousedown', () => {
         cursor.classList.add('active');
         cursorFollower.classList.add('active');
     });
-
     document.addEventListener('mouseup', () => {
         cursor.classList.remove('active');
         cursorFollower.classList.remove('active');
     });
-
-    // Add active class to links and buttons on hover
-    const links = document.querySelectorAll('a, button, .project-card');
+    const links = document.querySelectorAll('a, button, .project-card, .filter-btn, .social-link');
     links.forEach(link => {
         link.addEventListener('mouseenter', () => {
             cursor.classList.add('active');
             cursorFollower.classList.add('active');
         });
-        
         link.addEventListener('mouseleave', () => {
             cursor.classList.remove('active');
             cursorFollower.classList.remove('active');
         });
     });
-
-    // Header scroll effect and scroll-down visibility
     const header = document.querySelector('.header');
+    const scrollProgress = document.querySelector('.scroll-progress');
     const scrollDown = document.querySelector('.scroll-down');
-
     window.addEventListener('scroll', () => {
-        // Header effect
-        if (window.scrollY > 50) {
+        const scrollY = window.scrollY;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const scrollPercent = scrollY / docHeight;
+        if (scrollY > 50) {
             header.classList.add('scrolled');
         } else {
             header.classList.remove('scrolled');
         }
-
-        // Hide scroll-down indicator when scrolling down
-        if (window.scrollY > 100) {
+        gsap.to(scrollProgress, {
+            scaleX: scrollPercent,
+            duration: 0.1
+        });
+        if (scrollY > 100) {
             scrollDown.style.opacity = '0';
             scrollDown.style.visibility = 'hidden';
         } else {
@@ -77,17 +85,12 @@ document.addEventListener('DOMContentLoaded', () => {
             scrollDown.style.visibility = 'visible';
         }
     });
-
-    // Mobile navigation
     const hamburger = document.querySelector('.hamburger');
     const nav = document.querySelector('.nav');
-    
     hamburger.addEventListener('click', () => {
         hamburger.classList.toggle('active');
         nav.classList.toggle('show');
     });
-
-    // Close mobile nav when clicking on a nav link
     const navLinks = document.querySelectorAll('.nav-link');
     navLinks.forEach(link => {
         link.addEventListener('click', () => {
@@ -95,22 +98,16 @@ document.addEventListener('DOMContentLoaded', () => {
             nav.classList.remove('show');
         });
     });
-
-    // Active navigation link based on scroll position
     const sections = document.querySelectorAll('section');
-    
     function setActiveNavLink() {
         let current = '';
-        
         sections.forEach(section => {
             const sectionTop = section.offsetTop;
             const sectionHeight = section.clientHeight;
-            
             if (window.scrollY >= (sectionTop - 200)) {
                 current = section.getAttribute('id');
             }
         });
-        
         navLinks.forEach(link => {
             link.classList.remove('active');
             if (link.getAttribute('href') === `#${current}`) {
@@ -118,12 +115,8 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
-    
     window.addEventListener('scroll', setActiveNavLink);
-
-    // Back to top button
     const backToTopBtn = document.querySelector('.back-to-top');
-    
     window.addEventListener('scroll', () => {
         if (window.scrollY > 300) {
             backToTopBtn.classList.add('show');
@@ -131,70 +124,124 @@ document.addEventListener('DOMContentLoaded', () => {
             backToTopBtn.classList.remove('show');
         }
     });
-
-    // Project modal
     const modal = document.getElementById('project-modal');
     const modalClose = document.querySelector('.modal-close');
-    
-    // Close modal when clicking the close button
     modalClose.addEventListener('click', () => {
         modal.classList.remove('show');
         document.body.style.overflow = 'auto';
     });
-    
-    // Close modal when clicking outside the modal content
     window.addEventListener('click', (e) => {
         if (e.target === modal) {
             modal.classList.remove('show');
             document.body.style.overflow = 'auto';
         }
     });
-
-    // Fetch GitHub repositories
-    fetchGitHubRepos();
-
-    // Project filtering
+    gsap.from('.hero-subtitle', {
+        y: 30,
+        opacity: 0,
+        duration: 0.8,
+        delay: 0.2
+    });
+    gsap.from('.hero-title', {
+        y: 50,
+        opacity: 0,
+        duration: 1,
+        delay: 0.4
+    });
+    gsap.from('.hero-description', {
+        y: 30,
+        opacity: 0,
+        duration: 0.8,
+        delay: 0.8
+    });
+    gsap.from('.hero-cta .btn', {
+        y: 30,
+        opacity: 0,
+        duration: 0.6,
+        stagger: 0.2,
+        delay: 1.2
+    });
+    gsap.utils.toArray('.section').forEach(section => {
+        gsap.from(section.querySelector('.section-title'), {
+            scrollTrigger: {
+                trigger: section,
+                start: 'top 80%',
+            },
+            x: -50,
+            opacity: 0,
+            duration: 0.8
+        });
+    });
+    gsap.utils.toArray('.skills-category').forEach((card, i) => {
+        gsap.from(card, {
+            scrollTrigger: {
+                trigger: card,
+                start: 'top 85%',
+            },
+            y: 50,
+            opacity: 0,
+            duration: 0.6,
+            delay: i * 0.1
+        });
+    });
+    const skillBars = document.querySelectorAll('.skill-progress');
+    skillBars.forEach(bar => {
+        const width = bar.style.width;
+        bar.style.width = '0%';
+        ScrollTrigger.create({
+            trigger: bar,
+            start: 'top 85%',
+            onEnter: () => {
+                gsap.to(bar, {
+                    width: width,
+                    duration: 1.5,
+                    ease: 'power2.out'
+                });
+            }
+        });
+    });
+    const buttons = document.querySelectorAll('.btn');
+    buttons.forEach(btn => {
+        btn.addEventListener('mouseenter', (e) => {
+            const rect = btn.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            gsap.to(btn, {
+                x: (x - rect.width / 2) * 0.2,
+                y: (y - rect.height / 2) * 0.2,
+                duration: 0.3
+            });
+        });
+        btn.addEventListener('mouseleave', () => {
+            gsap.to(btn, {
+                x: 0,
+                y: 0,
+                duration: 0.3
+            });
+        });
+    });
+    fetchGitHubData();
     const filterBtns = document.querySelectorAll('.filter-btn');
-    
     filterBtns.forEach(btn => {
         btn.addEventListener('click', () => {
-            // Remove active class from all buttons
             filterBtns.forEach(b => b.classList.remove('active'));
-            
-            // Add active class to clicked button
             btn.classList.add('active');
-            
-            // Get filter value
             const filter = btn.getAttribute('data-filter');
-            
-            // Filter projects
             filterProjects(filter);
         });
     });
-
-    // Contact form submission
     const contactForm = document.getElementById('contact-form');
-
     if (contactForm) {
         contactForm.addEventListener('submit', (e) => {
             e.preventDefault();
-
-            // Get name for success message
             const name = document.getElementById('name').value;
-
-            // Show loading state
             const submitBtn = contactForm.querySelector('button[type="submit"]');
             const originalBtnText = submitBtn.innerHTML;
             submitBtn.disabled = true;
             submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
-
-            // Get form data for email
             const email = document.getElementById('email').value;
             const subject = document.getElementById('subject').value;
             const message = document.getElementById('message').value;
-
-            // Since you don't have templates, we'll use the direct send method
-            // Create parameters for a simple email
             const templateParams = {
                 from_name: name,
                 from_email: email,
@@ -203,10 +250,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 to_name: 'Zhafron Adani Kautsar',
                 to_email: 'zhafronadani@gmail.com',
                 reply_to: email,
-                year: new Date().getFullYear() // Add current year for the template
+                year: new Date().getFullYear()
             };
-
-            // Send email using EmailJS
             emailjs.send('service_wjre9ld','template_svs7h34', templateParams)
                 .then(function(response) {
                     console.log('SUCCESS!', response.status, response.text);
@@ -214,16 +259,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 })
                 .catch(function(error) {
                     console.log('FAILED...', error);
-
-                    // Reset button state
                     submitBtn.disabled = false;
                     submitBtn.innerHTML = originalBtnText;
-
-                    // Show error message
                     alert('Oops! Something went wrong. Please try again later or contact me directly at zhafronadani@gmail.com');
                 });
-
-            // Function to show success message
             function showSuccessMessage(name, form) {
                 const formContainer = form.parentElement;
                 formContainer.innerHTML = `
@@ -234,8 +273,6 @@ document.addEventListener('DOMContentLoaded', () => {
                         <button class="btn btn-primary" id="send-another">Send Another Message</button>
                     </div>
                 `;
-
-                // Add event listener to "Send Another Message" button
                 document.getElementById('send-another').addEventListener('click', () => {
                     window.location.reload();
                 });
@@ -243,26 +280,23 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
-
-/**
- * Fetch GitHub repositories
- */
-async function fetchGitHubRepos() {
+let allRepos = [];
+let starredRepos = [];
+async function fetchGitHubData() {
     try {
         const username = 'tickernelz';
-        const response = await fetch(`https://api.github.com/users/${username}/repos?sort=updated&per_page=100`);
-        const repos = await response.json();
-        
-        // Filter out forked repositories
-        const ownRepos = repos.filter(repo => !repo.fork);
-        
-        // Sort by stars (descending)
-        ownRepos.sort((a, b) => b.stargazers_count - a.stargazers_count);
-        
-        // Display repositories
-        displayRepos(ownRepos);
+        const [reposResponse, starredResponse] = await Promise.all([
+            fetch(`https://api.github.com/users/${username}/repos?sort=updated&per_page=100`),
+            fetch(`https://api.github.com/users/${username}/starred?per_page=100`)
+        ]);
+        const repos = await reposResponse.json();
+        const starred = await starredResponse.json();
+        allRepos = repos.filter(repo => !repo.fork);
+        starredRepos = starred;
+        allRepos.sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at));
+        displayRepos(allRepos, 'all');
     } catch (error) {
-        console.error('Error fetching GitHub repositories:', error);
+        console.error('Error fetching GitHub data:', error);
         document.getElementById('projects-container').innerHTML = `
             <div class="error-message">
                 <i class="fas fa-exclamation-circle"></i>
@@ -271,70 +305,61 @@ async function fetchGitHubRepos() {
         `;
     }
 }
-
-/**
- * Display repositories in the projects grid
- * @param {Array} repos - Array of GitHub repositories
- */
-function displayRepos(repos) {
+function displayRepos(repos, filter = 'all') {
     const projectsContainer = document.getElementById('projects-container');
-    
-    // Clear loading spinner
     projectsContainer.innerHTML = '';
-    
-    // Display up to 6 repositories
-    const displayedRepos = repos.slice(0, 6);
-    
-    displayedRepos.forEach(repo => {
-        // Determine project category
-        let category = 'other';
-        
-        if (repo.language) {
-            if (repo.language.toLowerCase() === 'python') {
-                category = 'python';
-            } else if (repo.language.toLowerCase() === 'javascript' || 
-                      repo.language.toLowerCase() === 'html' || 
-                      repo.language.toLowerCase() === 'css' || 
-                      repo.language.toLowerCase() === 'php') {
-                category = 'web';
-            }
-        }
-        
-        // Check if it's an Odoo-related project
-        if (repo.name.toLowerCase().includes('odoo') || 
-            (repo.description && repo.description.toLowerCase().includes('odoo'))) {
-            category = 'odoo';
-        }
-        
-        // Create project card
+    let displayedRepos = [];
+    if (filter === 'starred') {
+        displayedRepos = starredRepos.slice(0, 12);
+    } else if (filter === 'latest') {
+        displayedRepos = allRepos.slice(0, 6);
+    } else if (filter === 'all') {
+        displayedRepos = allRepos.slice(0, 12);
+    } else {
+        displayedRepos = allRepos.filter(repo => {
+            let category = determineCategory(repo);
+            return category === filter;
+        }).slice(0, 12);
+    }
+    displayedRepos.forEach((repo, index) => {
+        const category = determineCategory(repo);
         const projectCard = document.createElement('div');
         projectCard.className = `project-card ${category}`;
         projectCard.setAttribute('data-category', category);
-        projectCard.setAttribute('data-aos', 'fade-up');
-        projectCard.setAttribute('data-aos-delay', (displayedRepos.indexOf(repo) * 100).toString());
-        
-        // Determine icon based on category
-        let icon = 'fas fa-code';
-        if (category === 'python') {
-            icon = 'fab fa-python';
-        } else if (category === 'web') {
-            icon = 'fas fa-globe';
-        } else if (category === 'odoo') {
-            icon = 'fas fa-cubes';
-        }
-        
-        // Format description
+        const icon = getCategoryIcon(category);
         const description = repo.description || 'No description available';
-        
-        // Get languages
         const languages = [];
         if (repo.language) {
             languages.push(repo.language);
         }
-        
+        const updatedAt = new Date(repo.updated_at);
+        const now = new Date();
+        const diffTime = Math.abs(now - updatedAt);
+        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+        let timeAgo = '';
+        if (diffDays === 0) {
+            timeAgo = 'Today';
+        } else if (diffDays === 1) {
+            timeAgo = 'Yesterday';
+        } else if (diffDays < 7) {
+            timeAgo = `${diffDays}d ago`;
+        } else if (diffDays < 30) {
+            timeAgo = `${Math.floor(diffDays / 7)}w ago`;
+        } else if (diffDays < 365) {
+            timeAgo = `${Math.floor(diffDays / 30)}mo ago`;
+        } else {
+            timeAgo = `${Math.floor(diffDays / 365)}y ago`;
+        }
         projectCard.innerHTML = `
             <div class="project-header">
-                <h3 class="project-title">${repo.name}</h3>
+                <div>
+                    <h3 class="project-title">${repo.name}</h3>
+                    <div style="display: flex; gap: 0.5rem; margin-top: 0.5rem; align-items: center;">
+                        <span style="font-size: 1.2rem; color: var(--text-secondary); font-family: var(--font-mono);">
+                            <i class="fas fa-clock"></i> ${timeAgo}
+                        </span>
+                    </div>
+                </div>
                 <i class="${icon} project-icon"></i>
             </div>
             <div class="project-body">
@@ -344,23 +369,50 @@ function displayRepos(repos) {
                 <div class="project-languages">
                     ${languages.map(lang => `<span class="project-language">${lang}</span>`).join('')}
                     ${repo.stargazers_count > 0 ? `<span class="project-language"><i class="fas fa-star"></i> ${repo.stargazers_count}</span>` : ''}
+                    ${repo.forks_count > 0 ? `<span class="project-language"><i class="fas fa-code-branch"></i> ${repo.forks_count}</span>` : ''}
                 </div>
             </div>
         `;
-        
-        // Add click event to open modal
         projectCard.addEventListener('click', () => {
             openProjectModal(repo);
         });
-        
         projectsContainer.appendChild(projectCard);
+        gsap.from(projectCard, {
+            scrollTrigger: {
+                trigger: projectCard,
+                start: 'top 90%',
+            },
+            y: 30,
+            opacity: 0,
+            duration: 0.5,
+            delay: index * 0.05
+        });
     });
 }
-
-/**
- * Open project modal with repository details
- * @param {Object} repo - GitHub repository object
- */
+function determineCategory(repo) {
+    let category = 'other';
+    if (repo.language) {
+        if (repo.language.toLowerCase() === 'python') {
+            category = 'python';
+        } else if (['javascript', 'html', 'css', 'php', 'typescript'].includes(repo.language.toLowerCase())) {
+            category = 'web';
+        }
+    }
+    if (repo.name.toLowerCase().includes('odoo') || 
+        (repo.description && repo.description.toLowerCase().includes('odoo'))) {
+        category = 'odoo';
+    }
+    return category;
+}
+function getCategoryIcon(category) {
+    const icons = {
+        python: 'fab fa-python',
+        web: 'fas fa-globe',
+        odoo: 'fas fa-cubes',
+        other: 'fas fa-code'
+    };
+    return icons[category] || icons.other;
+}
 function openProjectModal(repo) {
     const modal = document.getElementById('project-modal');
     const modalTitle = document.getElementById('modal-title');
@@ -368,70 +420,41 @@ function openProjectModal(repo) {
     const modalLanguages = document.getElementById('modal-languages');
     const modalRepoLink = document.getElementById('modal-repo-link');
     const modalDemoLink = document.getElementById('modal-demo-link');
-    
-    // Set modal content
     modalTitle.textContent = repo.name;
     modalDescription.textContent = repo.description || 'No description available';
-    
-    // Set repository link
     modalRepoLink.href = repo.html_url;
-    
-    // Set demo link if homepage exists
     if (repo.homepage) {
         modalDemoLink.href = repo.homepage;
         modalDemoLink.style.display = 'inline-flex';
     } else {
         modalDemoLink.style.display = 'none';
     }
-    
-    // Clear languages
     modalLanguages.innerHTML = '';
-    
-    // Add language
     if (repo.language) {
         const languageSpan = document.createElement('span');
         languageSpan.className = 'modal-language';
         languageSpan.textContent = repo.language;
         modalLanguages.appendChild(languageSpan);
     }
-    
-    // Add stars if any
     if (repo.stargazers_count > 0) {
         const starsSpan = document.createElement('span');
         starsSpan.className = 'modal-language';
         starsSpan.innerHTML = `<i class="fas fa-star"></i> ${repo.stargazers_count}`;
         modalLanguages.appendChild(starsSpan);
     }
-    
-    // Add forks if any
     if (repo.forks_count > 0) {
         const forksSpan = document.createElement('span');
         forksSpan.className = 'modal-language';
         forksSpan.innerHTML = `<i class="fas fa-code-branch"></i> ${repo.forks_count}`;
         modalLanguages.appendChild(forksSpan);
     }
-    
-    // Show modal
+    const updatedSpan = document.createElement('span');
+    updatedSpan.className = 'modal-language';
+    updatedSpan.innerHTML = `<i class="fas fa-clock"></i> Updated ${new Date(repo.updated_at).toLocaleDateString()}`;
+    modalLanguages.appendChild(updatedSpan);
     modal.classList.add('show');
     document.body.style.overflow = 'hidden';
 }
-
-/**
- * Filter projects based on category
- * @param {string} filter - Category to filter by
- */
 function filterProjects(filter) {
-    const projectCards = document.querySelectorAll('.project-card');
-    
-    projectCards.forEach(card => {
-        if (filter === 'all') {
-            card.style.display = 'flex';
-        } else {
-            if (card.getAttribute('data-category') === filter) {
-                card.style.display = 'flex';
-            } else {
-                card.style.display = 'none';
-            }
-        }
-    });
+    displayRepos(filter === 'starred' ? starredRepos : allRepos, filter);
 }
