@@ -582,10 +582,50 @@ button {
 /* ===== About Section ===== */
 .about-content {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     gap: 6rem;
-    max-width: 80rem;
-    margin: 0 auto;
+}
+
+.about-image {
+    flex: 0 0 auto;
+    position: relative;
+}
+
+.about-photo-wrapper {
+    position: relative;
+    width: 300px;
+    height: 300px;
+}
+
+.about-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: var(--border-radius-md);
+    border: 3px solid var(--accent-primary);
+    position: relative;
+    z-index: 2;
+    transition: all var(--transition-normal);
+}
+
+.about-photo-border {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: 100%;
+    height: 100%;
+    border: 2px solid var(--accent-primary);
+    border-radius: var(--border-radius-md);
+    z-index: 1;
+    transition: all var(--transition-normal);
+}
+
+.about-photo-wrapper:hover .about-photo {
+    transform: translate(-10px, -10px);
+}
+
+.about-photo-wrapper:hover .about-photo-border {
+    transform: translate(10px, 10px);
 }
 
 .about-text {
@@ -1404,6 +1444,13 @@ button {
         flex-direction: column;
         text-align: center;
     }
+    .about-image {
+        margin: 0 auto;
+    }
+    .about-photo-wrapper {
+        width: 250px;
+        height: 250px;
+    }
     .about-details {
         align-items: center;
     }
@@ -1492,11 +1539,15 @@ button {
     }
     .hero-cta .btn {
         width: 100%;
-        mah: 25rem;
+        max-width: 25rem;
         margin-bottom: 1rem;
     }
     .scroll-down {
         bottom: 3rem;
+    }
+    .about-photo-wrapper {
+        width: 200px;
+        height: 200px;
     }
     .section-title {
         font-size: 2.8rem;

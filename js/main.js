@@ -172,6 +172,25 @@ document.addEventListener('DOMContentLoaded', () => {
             duration: 0.8
         });
     });
+    gsap.from('.about-photo', {
+        scrollTrigger: {
+            trigger: '.about-photo',
+            start: 'top 80%',
+        },
+        scale: 0.8,
+        opacity: 0,
+        duration: 0.8
+    });
+    gsap.from('.about-photo-border', {
+        scrollTrigger: {
+            trigger: '.about-photo-border',
+            start: 'top 80%',
+        },
+        scale: 0.8,
+        opacity: 0,
+        duration: 0.8,
+        delay: 0.2
+    });
     gsap.utils.toArray('.skills-category').forEach((card, i) => {
         gsap.from(card, {
             scrollTrigger: {
